@@ -1,0 +1,25 @@
+<figure class="figure">
+  <img src="http://placehold.it/820x320" class="figure-img img-fluid rounded">
+  <figcaption class="figure-caption">
+    <h4>Title: {{product.title}}</h4>
+    <h5>Price: {{product.price | currency}}</h5>
+    <h5> Description: {{product.description}}</h5>
+    <h5> Rating: {{product.rating}}</h5>
+    <h5>Categories: {{product.categories}}</h5>
+  </figcaption>
+</figure>
+
+<div class="row mt-4">
+  <div class="col-md-4">
+    <button class="btn btn-outline-secondary mr-3"
+            style="width:80px"
+            (click)="onBack()">
+      <i class="fa fa-chevron-left"></i> Back
+    </button>
+    <button class="btn btn-outline-primary"
+            style="width:80px"
+            (click)="goEdit()">
+      Edit
+    </button>
+  </div>
+</div>

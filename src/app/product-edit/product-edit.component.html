@@ -1,0 +1,132 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <form novalidate
+            (ngSubmit)="saveProduct()"
+            [formGroup]="productForm">
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="productNameId">Product Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="productNameId"
+                   type="text"
+                   placeholder="Name (required)"
+                   formControlName="title"
+                   name="title" />
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="ratingId">Rating (1-5)</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="ratingId"
+                   type="text"
+                   placeholder="Rating (1-5)"
+                   formControlName="rating"
+                   name="rating" />
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="shortdescriptionId">Short description</label>
+  
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="shortdescriptionId"
+                      placeholder="Short Description"
+                      rows=3
+                      formControlName="shortDescription"
+                      name="shortDescription"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="descriptionId">Description</label>
+  
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="descriptionId"
+                      placeholder="Description"
+                      rows=3
+                      formControlName="description"
+                      name="description"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="priceId">Price</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                      id="priceId"
+                      placeholder="Price"
+                      formControlName="price"
+                      name="price" />
+          </div>
+        </div>
+
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="categoriesId">Categories</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                      id="categoriesId"
+                      placeholder="Categories"
+                      formControlName="categories"
+                      name="categories" />
+          </div>
+        </div>
+  
+      <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="imageId">Image</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                      id="imageId"
+                      placeholder="Image"
+                      formControlName="image"
+                      name="image" />
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"                    
+                    type="submit">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"                    
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-warning"                  
+                    type="button"
+                    title="Delete this product"
+                    (click)="deleteProduct()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <div class="alert alert-danger"
+         *ngIf="errorMessage">{{errorMessage}}
+    </div>
+  </div>
