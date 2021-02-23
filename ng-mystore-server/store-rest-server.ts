@@ -15,7 +15,7 @@ mongoose.connect('mongodb+srv://ander_frago:4Vientos@cluster0.wdu3m.mongodb.net/
 const app = express();
 const router = express.Router();
 
-let contactSchema = new mongoose.Schema({
+let productSchema = new mongoose.Schema({
   title: {
       type: String,
       required: true,
@@ -53,11 +53,16 @@ let contactSchema = new mongoose.Schema({
     trim: true
   },
 });
-let Product = mongoose.model('products', contactSchema);
-
+//How to get rid of Error: “OverwriteModelError: Cannot overwrite `undefined` model once compiled.”?
+let Product:any;
+if (mongoose.models.Product) {
+  Product = mongoose.model('products');
+} else {
+  Product = mongoose.model('products', productSchema);
+}
 
 app.use(function (req: any, res: any, next: any) {
-  res.header("Access-Control-Allow-Origin", "http://dazzling-hypatia-8b2b7c.netlify.app"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://netlify-ng-mystore.netlify.app"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Methods", "POST, PUT, GET, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -75,7 +80,7 @@ app.use('/.netlify/functions/store-rest-server', router);  // path must route to
 router.get('/products', async (req:any, res:any) => {
   const products = await Product.find({}); 
   try {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.setHeader(200, { 'Content-Type': 'application/json' });
     res.write(products);
     res.end();
   } catch (err) {
