@@ -72,19 +72,19 @@ app.use(
 app.use(bodyParser.json())
 app.use('/.netlify/functions/store-rest-server', router);  // path must route to lambda
 
-app.get('/products', async (req:any, res:any) => {
-  const products = await Product.find({});
-  console.log("ask for products");
-  
+router.get('/products', async (req:any, res:any) => {
+  const products = await Product.find({}); 
   try {
-    return res.json(products);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.write(products);
+    res.end();
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
 
-app.post('/products', async (req:any, res:any) => {
+router.post('/products', async (req:any, res:any) => {
   const product = new Product(req.body);
 
   try {
@@ -95,7 +95,7 @@ app.post('/products', async (req:any, res:any) => {
   }
 });
 
-app.delete('/product/:id', async (req:any, res:any) => {
+router.delete('/product/:id', async (req:any, res:any) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id)
 
@@ -106,7 +106,7 @@ app.delete('/product/:id', async (req:any, res:any) => {
   }
 });
 
-app.patch('/product/:id', async (req:any, res:any)=> {
+router.patch('/product/:id', async (req:any, res:any)=> {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body)
     await Product.save()

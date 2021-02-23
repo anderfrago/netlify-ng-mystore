@@ -98,16 +98,17 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use('/.netlify/functions/store-rest-server', router); // path must route to lambda
-app.get('/products', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.get('/products', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var products;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, Product.find({})];
             case 1:
                 products = _a.sent();
-                console.log("ask for products");
                 try {
-                    res.json(products);
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.write(products);
+                    res.end();
                 }
                 catch (err) {
                     res.status(500).send(err);
@@ -116,7 +117,7 @@ app.get('/products', function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); });
-app.post('/products', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.post('/products', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var product, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -138,7 +139,7 @@ app.post('/products', function (req, res) { return __awaiter(void 0, void 0, voi
         }
     });
 }); });
-app.delete('/product/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.delete('/product/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var product, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -159,7 +160,7 @@ app.delete('/product/:id', function (req, res) { return __awaiter(void 0, void 0
         }
     });
 }); });
-app.patch('/product/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.patch('/product/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var product, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
