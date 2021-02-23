@@ -2,7 +2,7 @@
 [build]
   command = "ng build"
   functions = "functions"
-  publish = "dist\netlify-ng-mystore"
+  publish = "dist"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
