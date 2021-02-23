@@ -77,7 +77,7 @@ app.get('/products', async (req:any, res:any) => {
   console.log("ask for products");
   
   try {
-    res.send(products);
+    return res.json(products);
   } catch (err) {
     res.status(500).send(err);
   }
